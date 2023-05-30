@@ -1,138 +1,41 @@
 ---
+import Accessories from "../components/Accessories.astro";
+import HeroSection from "../components/HeroSection.astro";
+import LandingHeader from "../components/LandingHeader.astro";
+import ModelS from "../components/ModelS.astro";
+import ModelThree from "../components/ModelThree.astro";
+import ModelX from "../components/ModelX.astro";
+import ModelY from "../components/ModelY.astro";
+import PowerWall from "../components/PowerWall.astro";
 import Layout from "../layouts/Layout.astro";
-import Section from "../components/Section.astro";
 ---
 
 <Layout title="Electric Cars, Solar & Clean Energy | Tesla">
-	<main>
-		<header
-			id="landing-header"
-			class="py-3 px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white"
-		>
-			<div class="flex flex-grow basis-0">
-				<svg
-					class="h-6 w-28 transition-colors duration-500"
-					viewBox="0 0 342 35"
-					xmlns="http://www.w3.org/2000/svg"
-					><path
-						d="M0 .1a9.7 9.7 0 0 0 7 7h11l.5.1v27.6h6.8V7.3L26 7h11a9.8 9.8 0 0 0 7-7H0zm238.6 0h-6.8v34.8H263a9.7 9.7 0 0 0 6-6.8h-30.3V0zm-52.3 6.8c3.6-1 6.6-3.8 7.4-6.9l-38.1.1v20.6h31.1v7.2h-24.4a13.6 13.6 0 0 0-8.7 7h39.9v-21h-31.2v-7h24zm116.2 28h6.7v-14h24.6v14h6.7v-21h-38zM85.3 7h26a9.6 9.6 0 0 0 7.1-7H78.3a9.6 9.6 0 0 0 7 7zm0 13.8h26a9.6 9.6 0 0 0 7.1-7H78.3a9.6 9.6 0 0 0 7 7zm0 14.1h26a9.6 9.6 0 0 0 7.1-7H78.3a9.6 9.6 0 0 0 7 7zM308.5 7h26a9.6 9.6 0 0 0 7-7h-40a9.6 9.6 0 0 0 7 7z"
-						fill="currentColor"></path></svg
-				>
-			</div>
+	<LandingHeader />
 
-			<nav>
-				<ul
-					class="flex text-sm [&>li>a]:transition-colors [&>li>a]:duration-500 [&>li>a]:text-current [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
-				>
-					<li><a href="#model-s">Model S</a></li>
-					<li><a href="#model-3">Model 3</a></li>
-					<li><a href="#model-x">Model X</a></li>
-					<li><a href="#model-y">Model Y</a></li>
-					<li><a href="#powerwall">Powerwall</a></li>
-					<li><a href="#accesorios">Carga</a></li>
-				</ul>
-			</nav>
-
-			<nav class="flex flex-grow justify-end basis-0">
-				<ul
-					class="flex text-sm [&>li>a]:transition-colors [&>li>a]:duration-500 [&>li>a]:text-current [&>li>a]:font-medium [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
-				>
-					<li><a href="#">Soporte</a></li>
-					<li><a href="#">Tienda</a></li>
-					<li><a href="#">Cuenta</a></li>
-					<li><a href="#">Menú</a></li>
-				</ul>
-			</nav>
-
-			<div
-				id="menu-backdrop"
-				class={`
-      absolute bg-black/5 backdrop-blur-lg rounded
-      translate-x-[var(--left)] translate-y-[var(--top)]
-      left-0 top-0
-      w-[var(--width)] h-[var(--height)]
-      transition-all duration-500
-      ease-in-out opacity-0 -z-10
-    `}
-			>
-			</div>
-		</header>
-
-		<Section
-			title="Disfrute de tesla"
-			subtitle="Programe una prueba de conducción hoy mismo"
-			color="white"
-		>
-			<div slot="footer">
-				<a
-					class="border-[3px] border-white bg-white/5 backdrop-blur-sm text-sm rounded font-medium text-white px-12 py-2 inline-block hover:bg-white hover:text-black transition-colors"
-					href="#"
-				>
-					Prueba de conducción</a
-				>
-			</div>
-
-			<video
-				slot="background"
-				class="object-center object-cover h-full w-full"
-				autoplay
-				muted
-				loop
-				src="/video.webm"></video>
-		</Section>
-
-		<script>
-			const listItem = document.querySelectorAll("#landing-header li");
-			const menuBackDrop = document.querySelector(
-				"#menu-backdrop"
-			) as HTMLElement;
-
-			listItem.forEach((item) => {
-				item.addEventListener("mouseenter", () => {
-					const { left, top, width, height } =
-						item.getBoundingClientRect();
-
-					menuBackDrop.style.setProperty("--left", `${left}px`);
-					menuBackDrop.style.setProperty("--top", `${top}px`);
-					menuBackDrop.style.setProperty("--width", `${width}px`);
-					menuBackDrop.style.setProperty("--height", `${height}px`);
-
-					menuBackDrop.style.opacity = "1";
-					menuBackDrop.style.visibility = "visible";
-				});
-
-				item.addEventListener("mouseleave", () => {
-					menuBackDrop.style.opacity = "0";
-					menuBackDrop.style.visibility = "hidden";
-				});
-			});
-		</script>
-
-		<script>
-			const headerEl = document.querySelector(
-				"#landing-header"
-			) as HTMLElement;
-
-			const observerOptions = {
-				root: null,
-				rootMargin: "0px", // en cuanto se vea el elemento
-				threshold: 0.9, // porcentaje de visibilidad
-			};
-
-			const observer = new IntersectionObserver((entries) => {
-				entries.forEach((entry) => {
-					const { isIntersecting } = entry;
-					if (isIntersecting) {
-						const color =
-							entry.target.getAttribute("data-header-color");
-						headerEl.style.color = color;
-					}
-				});
-			}, observerOptions);
-
-			const sectionElements =
-				document.querySelectorAll(".landing-section");
-			sectionElements.forEach((section) => observer.observe(section));
-		</script>
+	<main
+		class="snap-y snap-mandatory relative w-full h-screen overflow-auto scroll-smooth"
+	>
+		<div class="snap-center">
+			<HeroSection />
+		</div>
+		<div class="snap-center">
+			<ModelY />
+		</div>
+		<div class="snap-center">
+			<ModelThree />
+		</div>
+		<div class="snap-center">
+			<ModelS />
+		</div>
+		<div class="snap-center">
+			<ModelX />
+		</div>
+		<div class="snap-center">
+			<PowerWall />
+		</div>
+		<div class="snap-center">
+			<Accessories />
+		</div>
 	</main>
 </Layout>
